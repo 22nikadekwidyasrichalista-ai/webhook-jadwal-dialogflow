@@ -3,23 +3,28 @@ const app = express();
 
 app.use(express.json());
 
-app.post("/webhook",(req,res)=>{
+app.post("/webhook", (req,res)=>{
 
   const hari = req.body.queryResult.parameters.hari;
 
   const jadwal = {
-    senin: "Matematika 07.30",
-    selasa: "Bahasa Inggris 08.00"
+    senin: "08.10-09.30 Bahasa Bali , 08.50 PPKN, 09.30 Bahasa Bali",
+    selasa: "07.30 Inggris, 08.50 Sejarah",
+    rabu: "07.30 Agama Hindu",
+    kamis: "07.30 Informatika",
+    jumat: "07.30 Olahraga"
   };
 
-  const hasil = jadwal[hari] || "Tidak ada jadwal";
+  const reply = jadwal[hari] || "Jadwal tidak ditemukan";
 
   res.json({
-    fulfillmentText: `Jadwal hari ${hari}: ${hasil}`
+    fulfillmentText: `Jadwal hari ${hari}: ${reply}`
   });
 
 });
 
 app.listen(3000,()=>{
- console.log("Server berjalan");
+ console.log("Server jalan");
 });
+
+
